@@ -44,6 +44,8 @@ class _base64(object):
             
 
         return ''.join(r)
+    en=encode
+
 
 base64 = _base64()
 
@@ -54,8 +56,18 @@ def get_wan_url(url):
         b64url = base64.encode(url)
 
     return '/proxy?url='+b64url+'&t='+str(int(time()*1000))
+exts = ['jpg','png','gif',]
+import re
+pic = re.compile('[\w\/\\-_\.\@\:]+\.(gif|jpg|png)$')
+def is_pic(url):
+    if pic.match(url):
+        return True
+    return False
 
 
+   
 if __name__ == '__main__':
     print base64.encode('baidu.com')
     print get_wan_url('baidu.com')
+    print pic.match('http://baidu.com/abc.gif')
+
