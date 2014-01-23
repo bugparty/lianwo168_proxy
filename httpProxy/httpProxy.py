@@ -3,19 +3,13 @@ import socket
 import SocketServer
 import urlparse
 import datetime
-from time import time
-import base64
+
 import select
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 wan_host = '192.168.5.1:80'
+from util import get_wan_url
 
-def get_wan_url(url):
-    if not url.startswith('http://'):
-        b64url = base64.b64encode('http://'+url)
-    else:
-        b64url = base64.b64encode(url)
 
-    return '/proxy?url='+b64url[:-1]+'&t='+str(int(time()*1000))
 
 class ProxyHandler (BaseHTTPServer.BaseHTTPRequestHandler):
     version_string = 'lianwo breaker '+__version__
